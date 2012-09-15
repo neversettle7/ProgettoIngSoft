@@ -22,6 +22,7 @@ public class Manager implements Runnable {
     int numCrawlers;
     Condition not_empty;
     int maxURLS;
+    int counterNotify;
     static Semaphore stopGenerator;
 
     public Manager(ArrayList workload, ArrayList visited, ArrayList emails){
@@ -31,10 +32,11 @@ public class Manager implements Runnable {
         //Queste variabili modificano il comportamento del programma:
         //Indica il numero massimo di thread crawler che possono operare in
         //contemporanea
-        this.numCrawlers = 16;
+        this.numCrawlers = 30;
         //Indica il numero di URL da analizzare
         maxURLS = 50;
         Manager.stopGenerator = new Semaphore(numCrawlers);
+        int counterNotify = 0;
     }
     
     public void run() {
@@ -75,7 +77,7 @@ public class Manager implements Runnable {
         Runnable crawler[];
         crawler = new Crawler[numCrawlers];
         while (analyzedURLS != maxURLS){
-        while (stopGenerator.availablePermits()>1){
+            if(stopGenerator.availablePermits()>0 && workload.size()>0){
                 Runnable crawler1 = new Crawler(prendiURL(workload));
                 Thread t1 = new Thread(crawler1);
                 getToken();
@@ -89,8 +91,17 @@ public class Manager implements Runnable {
                 System.out.println("Ci sono "+visited.size()+" link in visited.");
                 System.out.println("Ci sono "+Thread.activeCount()+" thread attivi.");
                 //printList(visited);
+                counterNotify = 0;
+            } else {
+                while (counterNotify == 0){
+                /*System.out.println("Permessi disponibili: "+stopGenerator.availablePermits());
+                System.out.println("Dimensione della coda workload: "+workload.size());
+                System.out.println("STO IN ATTESA.");*/
+                counterNotify++;
+                }
+            }
         }
-        }
+        //}
 
         
         /**

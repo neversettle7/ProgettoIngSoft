@@ -26,6 +26,10 @@ public class App {
         first_url = user_input.next();
         System.out.println("Hai inserito questo testo: "+first_url);
         
+        /**
+         * Genero le liste che saranno utilizzate.
+         */
+        
         ArrayList workload = new ArrayList();
         ArrayList visited = new ArrayList();
         ArrayList emails = new ArrayList();
@@ -35,6 +39,7 @@ public class App {
         /**
          * Genero il manager.
          */
+        
         Runnable manager = new Manager(workload, visited, emails);
         Thread m = new Thread(manager);
         m.start();
@@ -45,36 +50,45 @@ public class App {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            
-            /**
-             * Genero il primo crawler.
-             *
-             */
-            
-            /**
-             * Genero le liste che saranno utilizzate.
-             */
-            
-            /**
-             * Genero il thread manager.
-             */
+        /**
+         * Genero l'organizer.
+         */
+        Runnable organizer = new Organizer(visited, emails);
+        Thread o = new Thread(organizer);
+        o.start();
+        o.setName("Organizer");
+        try {
+            o.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
             /**
              * Muoio.
              */
         
         if(m.isAlive() == true){
+            System.out.println("*--------*");
             System.out.println("Il manager è vivo");
         } else {
-            System.out.println("il manager è morto");
+            System.out.println("*--------*");
+            System.out.println("Il manager è morto");
         }
         
-        System.out.println("*--------*");
+        if(o.isAlive() == true){
+            System.out.println("*--------*");
+            System.out.println("L'organizer è vivo");
+        } else {
+            System.out.println("*--------*");
+            System.out.println("L'organizer è morto");
+        }
+        
+        /*System.out.println("*--------*");
         System.out.println("Lista degli URL visitati: ");
         Manager.printList(visited);
         System.out.println("*--------*");
         System.out.println("Lista delle email trovate: ");
-        Manager.printList(emails);
+        Manager.printList(emails);*/
         System.out.println("\n\nMain in attesa di terminazione.");
     }
 }
