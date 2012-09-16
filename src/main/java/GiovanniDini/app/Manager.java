@@ -34,7 +34,7 @@ public class Manager implements Runnable {
         //contemporanea
         this.numCrawlers = 5;
         //Indica il numero di URL da analizzare
-        maxURLS = 100;
+        maxURLS = 20;
         Manager.stopGenerator = new Semaphore(numCrawlers);
         int counterNotify = 0;
     }
@@ -47,7 +47,7 @@ public class Manager implements Runnable {
         
         Thread m = Thread.currentThread();
         String name = m.getName();
-        System.out.println("Thread "+name+" appena nato.");
+        //System.out.println("Thread "+name+" appena nato.");
         
         //System.out.println("Thread iniziali attivi: "+Thread.activeCount());
         
@@ -76,6 +76,12 @@ public class Manager implements Runnable {
         int analyzedURLS = 1;
         Runnable crawler[];
         crawler = new Crawler[numCrawlers];
+        if (workload.size() == 0){
+            System.out.println("\nATTENZIONE:");
+            System.out.println("Non ci sono (nuovi?) URL da analizzare.");
+            System.out.println("Se si crede che questo sia dovuto ad un problema, cancellare il file \"visited.txt\".");
+            System.out.println("Il programma termina qui.\n");
+        } else {
         while (analyzedURLS != maxURLS){
             if(stopGenerator.availablePermits()>0 && workload.size()>0){
                 Runnable crawler1 = new Crawler(prendiURL(workload));
@@ -101,7 +107,7 @@ public class Manager implements Runnable {
                 }
             }
         }
-        //}
+        }
 
         
         /**
@@ -112,7 +118,7 @@ public class Manager implements Runnable {
             //Attendo che tutti i thread abbiano rilasciato il token.
         }
         
-        System.out.println("THREAD "+name+" in attesa di terminazione. ");
+        //System.out.println("THREAD "+name+" in attesa di terminazione. ");
     }
     
     /**

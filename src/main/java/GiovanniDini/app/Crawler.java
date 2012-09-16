@@ -44,13 +44,13 @@ public class Crawler implements Runnable {
         Thread t = Thread.currentThread();
         String name = t.getName();
         System.out.println();
-        System.out.println("Thread "+name+" appena nato.");
+        //System.out.println("Thread "+name+" appena nato.");
 
         /**
          * Ricevo URL da analizzare (da chi?).
          */
         
-        System.out.print("Il thread "+name);
+        //System.out.print("Il thread "+name);
         this.parsing(URL);
         
         /**
@@ -63,13 +63,13 @@ public class Crawler implements Runnable {
          * Muoio.
          */
         
-        System.out.println("Thread "+name+" in fase di terminazione.");
+        //System.out.println("Thread "+name+" in fase di terminazione.");
         
         //System.out.println("Thread attivi prima di questa terminazione: "+Thread.activeCount());
     }
     
     protected void parsing(String URL) {
-        System.out.println(" deve lavorare su questo indirizzo: "+URL);
+        //System.out.println(" deve lavorare su questo indirizzo: "+URL);
         try {
             /**
              * Effettuo il parsing della pagina.
@@ -84,7 +84,7 @@ public class Crawler implements Runnable {
     
     protected void findLinksEmails(Document doc) {
         Elements links = doc.select("a[href]");
-        print("\nLinks: (%d)", links.size());
+        //System.out.println("\nLinks: (%d)", links.size());
         for (Element link : links) {
             //print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
             String content = link.attr("abs:href").toString();
@@ -92,10 +92,11 @@ public class Crawler implements Runnable {
             if (content.contains(emailPre)){
                 String newStr;
                 newStr = link.attr("abs:href").replace(emailPre,"");
+                newStr = newStr.replaceAll(" ","");
                 String[] newStrClean = newStr.split("\\?");
                 newStr = newStrClean[0];
                 Manager.checkEmail(newStr);
-                System.out.println("Ho trovato questa email: "+newStr);
+                //System.out.println("Ho trovato questa email: "+newStr);
             } else {
             Manager.checkURL(link.attr("abs:href"));
             }

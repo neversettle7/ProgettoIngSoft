@@ -1,5 +1,7 @@
 package GiovanniDini.app;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +14,7 @@ public class App {
          * Nasco.
          */
         
-        System.out.println("Thread main partito.");
+        //System.out.println("Thread main partito.");
         
         /**
          * Ricevo l'URL iniziale e istanzio il manager.
@@ -24,7 +26,7 @@ public class App {
         Scanner user_input = new Scanner(System.in);
         String first_url;
         first_url = user_input.next();
-        System.out.println("Hai inserito questo testo: "+first_url);
+        //System.out.println("Hai inserito questo testo: "+first_url);
         
         /**
          * Genero le liste che saranno utilizzate.
@@ -33,6 +35,26 @@ public class App {
         ArrayList workload = new ArrayList();
         ArrayList visited = new ArrayList();
         ArrayList emails = new ArrayList();
+        
+        
+        File emailsFile = new File("emails.txt");
+        File visitedFile = new File ("visited.txt");
+        if(!emailsFile.exists()) {
+            try {
+                emailsFile.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(!visitedFile.exists()) {
+            try {
+                visitedFile.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        Organizer.fileEmails(emailsFile, emails);
+        Organizer.fileVisited(visitedFile, visited);
         
         workload.add(first_url);
 
@@ -67,7 +89,7 @@ public class App {
              * Muoio.
              */
         
-        if(m.isAlive() == true){
+        /*if(m.isAlive() == true){
             System.out.println("*--------*");
             System.out.println("Il manager è vivo");
         } else {
@@ -81,7 +103,7 @@ public class App {
         } else {
             System.out.println("*--------*");
             System.out.println("L'organizer è morto");
-        }
+        }*/
         
         /*System.out.println("*--------*");
         System.out.println("Lista degli URL visitati: ");
@@ -89,6 +111,6 @@ public class App {
         System.out.println("*--------*");
         System.out.println("Lista delle email trovate: ");
         Manager.printList(emails);*/
-        System.out.println("\n\nMain in attesa di terminazione.");
+        //System.out.println("\n\nMain in attesa di terminazione.");
     }
 }
