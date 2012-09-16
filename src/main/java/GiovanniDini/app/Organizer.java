@@ -5,6 +5,9 @@
 package GiovanniDini.app;
 
 import java.util.*;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +23,17 @@ public class Organizer implements Runnable {
     }
     
     public void run(){
+        try {
+            FileOutputStream output = new FileOutputStream("emails.txt");
+            PrintStream write = new PrintStream(output);
+            for (int i = 0; i < emails.size(); i++) {
+                write.print(emails.get(i));
+                write.print(",");
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         System.out.println("*--*--*--*--*");
         System.out.println("Lista degli URL visitati:");
         Manager.printList(visited);

@@ -92,6 +92,8 @@ public class Crawler implements Runnable {
             if (content.contains(emailPre)){
                 String newStr;
                 newStr = link.attr("abs:href").replace(emailPre,"");
+                String[] newStrClean = newStr.split("\\?");
+                newStr = newStrClean[0];
                 Manager.checkEmail(newStr);
                 System.out.println("Ho trovato questa email: "+newStr);
             } else {

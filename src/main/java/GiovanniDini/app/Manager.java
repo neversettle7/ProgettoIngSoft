@@ -32,9 +32,9 @@ public class Manager implements Runnable {
         //Queste variabili modificano il comportamento del programma:
         //Indica il numero massimo di thread crawler che possono operare in
         //contemporanea
-        this.numCrawlers = 30;
+        this.numCrawlers = 5;
         //Indica il numero di URL da analizzare
-        maxURLS = 50;
+        maxURLS = 100;
         Manager.stopGenerator = new Semaphore(numCrawlers);
         int counterNotify = 0;
     }
