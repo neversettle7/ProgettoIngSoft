@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class App {
+public class Main {
 
     public static void main(String[] args) {
 
@@ -17,7 +17,7 @@ public class App {
         //System.out.println("Thread main partito.");
         
         /**
-         * Ricevo l'URL iniziale e istanzio il manager.
+         * Ricevo l'URL iniziale e faccio partire il manager.
          * Ricevo da input da tastiera l'URL iniziale, lo inserisco nella lista
          * degli URL da visitare, istanzio il manager e gli passo le liste.
          */
@@ -47,7 +47,7 @@ public class App {
                 try {
                     workloadFile.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             System.out.println("Devo leggere il file.");
@@ -62,14 +62,14 @@ public class App {
             try {
                 emailsFile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if(!visitedFile.exists()) {
             try {
                 visitedFile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
         Organizer.fileEmails(emailsFile, emails);
@@ -88,7 +88,7 @@ public class App {
         try {
             m.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         /**
@@ -101,7 +101,7 @@ public class App {
         try {
             o.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             /**
