@@ -76,7 +76,7 @@ public class Manager implements Runnable {
         int analyzedURLS = 1;
         Runnable crawler[];
         crawler = new Crawler[numCrawlers];
-        if (workload.size() == 0){
+        if (workload.isEmpty()){
             System.out.println("\nATTENZIONE:");
             System.out.println("Non ci sono (nuovi?) URL da analizzare.");
             System.out.println("Se si crede che questo sia dovuto ad un problema, cancellare il file \"visited.txt\".");

@@ -22,10 +22,15 @@ public class App {
          * degli URL da visitare, istanzio il manager e gli passo le liste.
          */
         
-        System.out.println("Inserire l'URL da cui cominciare l'analisi:");
+        System.out.println("Inserire l'URL da cui cominciare l'analisi, oppure digitare \"file\" se");
+        System.out.println("si desidera leggere la workload dal file apposito (per informazioni digitare \"help\"):");
         Scanner user_input = new Scanner(System.in);
         String first_url;
         first_url = user_input.next();
+        while ("help".equals(first_url)) {
+            System.out.println("Ciao, sono l'aiuto");
+            first_url = user_input.next();
+        }
         //System.out.println("Hai inserito questo testo: "+first_url);
         
         /**
@@ -36,6 +41,20 @@ public class App {
         ArrayList visited = new ArrayList();
         ArrayList emails = new ArrayList();
         
+        if ("file".equals(first_url)) {
+            File workloadFile = new File ("workload.txt");
+            if(!workloadFile.exists()) {
+                try {
+                    workloadFile.createNewFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            System.out.println("Devo leggere il file.");
+            Organizer.fileWorkload(workloadFile, workload);
+            first_url = (String) workload.get(0);
+            System.out.println("Devo analizzare questo: "+first_url);
+        }
         
         File emailsFile = new File("emails.txt");
         File visitedFile = new File ("visited.txt");
