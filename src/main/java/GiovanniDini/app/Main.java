@@ -26,9 +26,11 @@ public class Main {
         System.out.println("Autore: Giovanni Dini");
         System.out.println("Matricola: 232274");
         System.out.println("Email: gioggi2002@gmail.com\n"); 
-       
-        System.out.println("Inserire l'URL da cui cominciare l'analisi, oppure digitare \"file\" se ");
-        System.out.println("si desidera leggere la workload dal file apposito ");
+        
+        System.out.println("Operazioni disponibili:");
+        System.out.println("- Inserire l'URL da cui cominciare l'analisi \n- Digitare \"file\" se ");
+        System.out.print("si desidera leggere la workload dal file apposito (workload.csv)");
+        System.out.println("- Digitare \"restart\" se si desidera riprendere una vecchia sessione :");
         System.out.println("(digitare \"help\" per istruzioni o \"exit\" per uscire):\n\n");
         Scanner user_input = new Scanner(System.in);
         String first_url;
@@ -98,6 +100,15 @@ public class Main {
             first_url = (String) workload.get(0);
             System.out.println("Devo analizzare questo: "+first_url);
         }
+        if ("restart".equals(first_url)) {
+            File lastWorkload = new File ("nextWorkload.csv");
+            if(!lastWorkload.exists()) {
+                    System.out.println("\n\nIl file non esisteva. Aggiungere manualmente il primo URL da analizzare: ");
+                    first_url = user_input.next();
+                }
+            System.out.println("Riprendo il lavoro dall'ultima sessione.");
+            Organizer.fileWorkload(lastWorkload, workload);
+        }
         
         File emailsFile = new File("emails.csv");
         File visitedFile = new File ("visited.csv");
@@ -137,9 +148,9 @@ public class Main {
             Organizer.fileParam(paramFile, param);
             numCrawlers = (Integer) param.get(0);
             maxURLS = (Integer) param.get(1);
-            System.out.println("Trovato file di configurazione. Il programma avrà questi parametri: ");
+            System.out.println("\nTrovato file di configurazione. Il programma avrà questi parametri: ");
             System.out.println("-Numero di crawlers in contemporanea: "+numCrawlers);
-            System.out.println("-Profondità dell'analisi: "+maxURLS+" URLS");
+            System.out.println("-Profondità dell'analisi: "+maxURLS+" URLS\n");
         }
         
         Runnable manager = new Manager(workload, visited, emails, numCrawlers, maxURLS);
@@ -164,7 +175,15 @@ public class Main {
         } catch (InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+        
+        System.out.println("L'analisi è stata completata. ");
+        System.out.println("Ci sono ancora "+workload.size()+" URL nella workload.");
+        System.out.println("Vuoi che siano scritti in un file in modo da poter proseguire l'analisi successivamente? si/no");
+        String answer = user_input.next();
+        if ("si".equals(answer)){
+            File finalWorkload = new File("nextWorkload.csv");
+            Organizer.finalWorkload(finalWorkload, workload);
+        }
             /**
              * Muoio.
              */

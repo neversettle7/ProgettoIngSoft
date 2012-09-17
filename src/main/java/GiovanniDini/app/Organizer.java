@@ -180,4 +180,19 @@ public class Organizer implements Runnable {
         return visited;
     }
     
+    public static void finalWorkload(File file, ArrayList workload){
+        try {
+            file.createNewFile();
+            FileOutputStream outputWorkload = new FileOutputStream(file);
+            PrintStream writeWorkload = new PrintStream(outputWorkload);
+            for (int i = 0; i < workload.size(); i++) {
+                writeWorkload.print(workload.get(i));
+                writeWorkload.print(",");
+            }
+            writeWorkload.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

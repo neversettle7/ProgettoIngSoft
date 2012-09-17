@@ -36,50 +36,75 @@ public class Crawler implements Runnable {
     
     @Override
     public void run() {
-        
-        /**
-         * Nasco.
-         */
-        
-        Thread t = Thread.currentThread();
-        String name = t.getName();
-        System.out.println();
-        //System.out.println("Thread "+name+" appena nato.");
 
-        /**
-         * Ricevo URL da analizzare (da chi?).
-         */
-        
-        //System.out.print("Il thread "+name);
-        this.parsing(URL);
-        
-        /**
-         * Rilascio il token.
-         */
-        
-        Manager.releaseToken();
-        
-        /**
-         * Muoio.
-         */
-        
-        //System.out.println("Thread "+name+" in fase di terminazione.");
-        
-        //System.out.println("Thread attivi prima di questa terminazione: "+Thread.activeCount());
+            /**
+             * Nasco.
+             */
+            
+            Thread t = Thread.currentThread();
+            String name = t.getName();
+            System.out.println();
+            //System.out.println("Thread "+name+" appena nato.");
+            
+        try {
+            Connection.Response response = Jsoup.connect(URL).timeout(0).execute();
+            int statusCode = response.statusCode();
+            String contentType = response.contentType();
+            if (statusCode == 200) {
+                try {
+                    String[] contentTypeClean = contentType.split(";");
+                    contentType = contentTypeClean[0];
+                    if ("text/html".equals(contentType) || "text/plain".equals(contentType) ||
+                        "text/css".equals(contentType) || "text/asp".equals(contentType) ||
+                        "text/xml".equals(contentType) || "text/uri-list".equals(contentType) ||
+                        "text/richtext".equals(contentType)) {
+                        Document doc = Jsoup.connect(URL).timeout(0).get();
+                        parsing(doc);
+                        System.out.println(name+" "+statusCode+" "+contentType);
+                    } else {
+                        System.out.println("La pagina "+URL+" non è stata processata perché aveva questo formato: "+contentType);
+                    }
+                }
+                catch (IOException ex) {
+                    Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("La pagina "+URL+" ha dato questo errore: "+statusCode);
+            }
+            } catch (IOException ex) {
+            //Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("404 ERROR");
+        }
+            
+            
+            //System.out.print("Il thread "+name);
+
+            
+            /**
+             * Rilascio il token.
+             */
+            
+            Manager.releaseToken();
+            
+            /**
+             * Muoio.
+             */
+            
+            //System.out.println("Thread "+name+" in fase di terminazione.");
+            
+            //System.out.println("Thread attivi prima di questa terminazione: "+Thread.activeCount());
+
     }
     
-    protected void parsing(String URL) {
+    protected void parsing(Document doc) {
         //System.out.println(" deve lavorare su questo indirizzo: "+URL);
-        try {
             /**
              * Effettuo il parsing della pagina.
              */
-            Document doc = Jsoup.connect(URL).timeout(0).get();
+            //Document doc = Jsoup.connect(URL).timeout(0).get();
             //System.out.println(doc);
             findLinksEmails(doc);
-        } catch (IOException ex) {
-            Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
     
     protected void findLinksEmails(Document doc) {

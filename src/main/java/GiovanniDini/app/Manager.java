@@ -18,22 +18,23 @@ public class Manager implements Runnable {
     static ArrayList workload;
     static ArrayList visited;
     static ArrayList emails;
-    int numCrawlers;
-    Condition not_empty;
-    int maxURLS;
+    static int numCrawlers;
+    static int maxURLS;
     int counterNotify;
     static Semaphore stopGenerator;
+    Condition not_empty;
 
     public Manager(ArrayList workload, ArrayList visited, ArrayList emails, int numCrawlers, int maxURLS){
         Manager.workload = workload;
         Manager.visited = visited;
         Manager.emails = emails;
-        /*//Queste variabili modificano il comportamento del programma:
+        //Queste variabili modificano il comportamento del programma:
         //Indica il numero massimo di thread crawler che possono operare in
         //contemporanea
-        this.numCrawlers = 5;
+        //Manager.numCrawlers = ;
         //Indica il numero di URL da analizzare
-        maxURLS = 20;*/
+        Manager.numCrawlers = numCrawlers;
+        Manager.maxURLS = maxURLS;
         Manager.stopGenerator = new Semaphore(numCrawlers);
         int counterNotify = 0;
     }
