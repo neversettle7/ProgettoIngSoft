@@ -24,7 +24,7 @@ public class Organizer implements Runnable {
     
     public void run(){
         try {
-            FileOutputStream outputEmails = new FileOutputStream("emails.txt");
+            FileOutputStream outputEmails = new FileOutputStream("emails.csv");
             PrintStream writeEmails = new PrintStream(outputEmails);
             for (int i = 0; i < emails.size(); i++) {
                 writeEmails.print(emails.get(i));
@@ -32,8 +32,8 @@ public class Organizer implements Runnable {
             }
             writeEmails.close();
             System.out.println("*--*--*--*--*");
-            System.out.println("La lista delle emails trovate è nel file emails.txt.");
-            FileOutputStream outputVisited = new FileOutputStream("visited.txt");
+            System.out.println("La lista delle emails trovate è nel file emails.csv.");
+            FileOutputStream outputVisited = new FileOutputStream("visited.csv");
             PrintStream writeVisited = new PrintStream(outputVisited);
             for (int i = 0; i < visited.size(); i++) {
                 writeVisited.print(visited.get(i));
@@ -41,7 +41,7 @@ public class Organizer implements Runnable {
             }
             writeVisited.close();
             System.out.println("*--*--*--*--*");
-            System.out.println("La lista degli URL visitati è nel file visited.txt.");
+            System.out.println("La lista degli URL visitati è nel file visited.csv.");
             System.out.println("*--*--*--*--*");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,6 +62,36 @@ public class Organizer implements Runnable {
      * email già trovati, URL già visitati) da file.
      * ************************************************************************
      */
+    
+    /**
+     * Questo metodo importa gli URL da visitare nella workload.
+     * @param file
+     * @param workload
+     * @return 
+     */
+    public static ArrayList fileParam(File file, ArrayList param) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = null;
+            
+            try {
+                while ((line = br.readLine()) != null){
+                    String[] value = line.split(",");
+                    for (String temp : value){
+                        //System.out.println(email);
+                        int num = Integer.parseInt(temp);
+                        param.add(num);
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return param;
+    }
     
     /**
      * Questo metodo importa gli URL da visitare nella workload.

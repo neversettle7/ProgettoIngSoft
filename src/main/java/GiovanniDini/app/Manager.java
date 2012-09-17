@@ -5,7 +5,6 @@
 package GiovanniDini.app;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.*;
 import java.util.logging.Level;
@@ -25,16 +24,16 @@ public class Manager implements Runnable {
     int counterNotify;
     static Semaphore stopGenerator;
 
-    public Manager(ArrayList workload, ArrayList visited, ArrayList emails){
+    public Manager(ArrayList workload, ArrayList visited, ArrayList emails, int numCrawlers, int maxURLS){
         Manager.workload = workload;
         Manager.visited = visited;
         Manager.emails = emails;
-        //Queste variabili modificano il comportamento del programma:
+        /*//Queste variabili modificano il comportamento del programma:
         //Indica il numero massimo di thread crawler che possono operare in
         //contemporanea
         this.numCrawlers = 5;
         //Indica il numero di URL da analizzare
-        maxURLS = 20;
+        maxURLS = 20;*/
         Manager.stopGenerator = new Semaphore(numCrawlers);
         int counterNotify = 0;
     }
@@ -79,7 +78,7 @@ public class Manager implements Runnable {
         if (workload.isEmpty()){
             System.out.println("\nATTENZIONE:");
             System.out.println("Non ci sono (nuovi?) URL da analizzare.");
-            System.out.println("Se si crede che questo sia dovuto ad un problema, cancellare il file \"visited.txt\".");
+            System.out.println("Se si crede che questo sia dovuto ad un problema, cancellare il file \"visited.csv\".");
             System.out.println("Il programma termina qui.\n");
         } else {
         while (analyzedURLS != maxURLS){
