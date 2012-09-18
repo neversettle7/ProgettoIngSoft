@@ -48,8 +48,7 @@ public class Manager implements Runnable {
         try {
             t.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null,
-                    ex);
+            //Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null,ex);
         }
 
         /**
@@ -68,6 +67,7 @@ public class Manager implements Runnable {
             System.out.println("- Gli URL trovati nella pagina iniziale erano già contenuti nel file visited.csv, quindi sono già stati analizzati in una precedente sessione.");
             System.out.println("\nSe si crede che questo sia dovuto ad un problema, cancellare il file \"visited.csv\".");
             System.out.println("\n\nIl programma termina ora.\n");
+            return;
         } else {
             // Fin quando non si è raggiunta la profondità massima dell'analisi.
             while (analyzedURLS != maxURLS) {
@@ -203,8 +203,7 @@ public class Manager implements Runnable {
             // System.out.println("Token acquisito da un crawler: "+stopGenerator.availablePermits());
             // System.out.println("THREAD ATTIVI: "+Thread.activeCount());
         } catch (InterruptedException ex) {
-            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null,
-                    ex);
+            //Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null,ex);
         }
     }
 

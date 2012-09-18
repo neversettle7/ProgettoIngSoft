@@ -110,7 +110,7 @@ public class ProgettoIngSoft {
                     System.out.println("\n\nIl file non esisteva. Aggiungere manualmente il primo URL da analizzare: ");
                     first_url = user_input.next();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 // System.out.println("Devo leggere il file.");
@@ -151,7 +151,7 @@ public class ProgettoIngSoft {
                 try {
                     lastWorkload.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Il file nextWorkload.csv è stato resettato.");
             } else {
@@ -159,7 +159,7 @@ public class ProgettoIngSoft {
                 try {
                     lastWorkload.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             System.out.println("Il file nextWorkload.csv è stato resettato.");
@@ -169,7 +169,7 @@ public class ProgettoIngSoft {
                 try {
                     emailsFile.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Il file emails.csv è stato resettato.");
             } else {
@@ -177,7 +177,7 @@ public class ProgettoIngSoft {
                 try {
                     emailsFile.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Il file emails.csv è stato resettato.");
             }
@@ -187,7 +187,7 @@ public class ProgettoIngSoft {
                 try {
                     visitedFile.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Il file visited.csv è stato resettato.");
             } else {
@@ -195,7 +195,7 @@ public class ProgettoIngSoft {
                 try {
                     visitedFile.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                    ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Il file visited.csv è stato resettato.");
             }
@@ -218,7 +218,7 @@ public class ProgettoIngSoft {
             try {
                 emailsFile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -230,7 +230,7 @@ public class ProgettoIngSoft {
             try {
                 visitedFile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
+                ////Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -295,8 +295,7 @@ public class ProgettoIngSoft {
         try {
             m.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(ProgettoIngSoft.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         /**
@@ -313,8 +312,7 @@ public class ProgettoIngSoft {
         try {
             o.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(ProgettoIngSoft.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ProgettoIngSoft.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         System.out.println("L'analisi è stata completata. ");

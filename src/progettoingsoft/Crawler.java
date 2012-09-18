@@ -47,6 +47,12 @@ public class Crawler implements Runnable {
              * ritorna e il tipo di documento.
              */
             
+            // Controlliamo che l’URL passato sia ben formato.
+            String[] URLcheck = URL.split("//");
+            if (!"http:".equals(URLcheck[0])) {
+                System.out.println("URL malformato. Il programma termina ora.");
+                return;
+            }
             Connection.Response response = Jsoup.connect(URL).timeout(0).execute();
             int statusCode = response.statusCode();
             String contentType = response.contentType();
@@ -74,8 +80,7 @@ public class Crawler implements Runnable {
                         // System.out.println("La pagina "+URL+" non è stata processata perchè aveva questo formato: "+contentType);
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE,
-                            null, ex);
+                    //Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE,null, ex);
                 }
             } else {
                 // Stampa di controllo.

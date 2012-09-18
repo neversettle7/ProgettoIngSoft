@@ -48,7 +48,7 @@ public class Organizer implements Runnable {
             System.out.println("La lista degli URL visitati è nel file visited.csv.");
             System.out.println("*--*--*--*--*");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         /**
@@ -89,10 +89,10 @@ public class Organizer implements Runnable {
                     }
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return param;
     }
@@ -119,11 +119,11 @@ public class Organizer implements Runnable {
                     }
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return workload;
     }
@@ -150,11 +150,11 @@ public class Organizer implements Runnable {
                     }
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return emails;
     }
@@ -181,11 +181,11 @@ public class Organizer implements Runnable {
                     }
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return visited;
     }
@@ -209,7 +209,7 @@ public class Organizer implements Runnable {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Organizer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
