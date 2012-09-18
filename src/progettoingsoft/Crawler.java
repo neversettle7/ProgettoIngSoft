@@ -117,7 +117,6 @@ public class Crawler implements Runnable {
         // Document doc = Jsoup.connect(URL).timeout(0).get();
         // System.out.println(doc);
         findLinksEmails(doc);
-
     }
 
     /**

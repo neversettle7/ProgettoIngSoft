@@ -68,7 +68,7 @@ public class Organizer implements Runnable {
      */
     
     /**
-     * Questo metodo importa gli URL da visitare nella workload.
+     * Questo metodo importa i parametri del programma.
      *
      * @param file è il file su cui operiamo.
      * @param workload è la lista su cui operiamo
