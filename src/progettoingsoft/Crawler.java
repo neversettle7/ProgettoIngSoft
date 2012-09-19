@@ -50,7 +50,7 @@ public class Crawler implements Runnable {
             // Controlliamo che l’URL passato sia ben formato.
             String[] URLcheck = URL.split("//");
             if (!"http:".equals(URLcheck[0])) {
-                System.out.println("URL malformato. Il programma termina ora.");
+                System.out.println("URL malformato. Il crawler termina ora.");
                 return;
             }
             Connection.Response response = Jsoup.connect(URL).timeout(0).execute();

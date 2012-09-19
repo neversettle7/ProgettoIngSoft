@@ -127,8 +127,13 @@ public class ProgettoIngSoft {
                 first_url = user_input.next();
             } else {
                 System.out.println("Riprendo il lavoro dall'ultima sessione.");
+                if (lastWorkload.length() == 0){
+                    System.out.println("Il file nextWorkload.csv era vuoto. Inserire manualmente un URL:");
+                    first_url = user_input.next();
+                } else {
                 Organizer.fileWorkload(lastWorkload, workload);
                 first_url = (String) workload.get(0);
+                }
                 //System.out.println("Devo analizzare questo: " + first_url);
             }
         }
